@@ -1,0 +1,29 @@
+Group,Cutoff,Type,Value
+All,AO>12,Pacbio Validated,34587
+All,AO>12,Total,37468
+All,AO>20,Pacbio Validated,34469
+All,AO>20,Total,36586
+Mutect2+Strelka,AO>12,Pacbio Validated,4427
+Mutect2+Strelka,AO>12,Total,6852
+Mutect2+Strelka,AO>20,Pacbio Validated,4545
+Mutect2+Strelka,AO>20,Total,7734
+Mutect2+RUFUS,AO>12,Pacbio Validated,123
+Mutect2+RUFUS,AO>12,Total,318
+Mutect2+RUFUS,AO>20,Pacbio Validated,119
+Mutect2+RUFUS,AO>20,Total,277
+RUFUS+Strelka,AO>12,Pacbio Validated,415
+RUFUS+Strelka,AO>12,Total,559
+RUFUS+Strelka,AO>20,Pacbio Validated,414
+RUFUS+Strelka,AO>20,Total,518
+Mutect,AO>12,Pacbio Validated,244
+Mutect,AO>12,Total,2394
+Mutect,AO>20,Pacbio Validated,246
+Mutect,AO>20,Total,2435
+RUFUS,AO>12,Pacbio Validated,203
+RUFUS,AO>12,Total,25921
+RUFUS,AO>20,Pacbio Validated,203
+RUFUS,AO>20,Total,1871
+Strelka,AO>12,Pacbio Validated,3781
+Strelka,AO>12,Total,12735
+Strelka,AO>20,Pacbio Validated,3782
+Strelka,AO>20,Total,12776

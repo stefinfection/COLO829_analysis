@@ -1,0 +1,241 @@
+---
+title: "RUFUS_COLO829_Intersections"
+author: "Stephanie Georges"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+```{r}
+# Specific library
+library(UpSetR)
+library(ggplot2)
+```
+
+## Chr-by-Chr CALL Intersections With Prefilters Applied (Normalized, No Inherited Removed)
+
+```{r}
+
+# Dataset
+input <- c(
+Strelka = 12031,                                    
+Mutect = 2164,                                    
+RUFUS = 12398,                                    
+"RUFUS&Strelka" = 1263,                                    
+"Strelka&Mutect" = 5171,                                    
+"RUFUS&Mutect" = 548,                                    
+"RUFUS&Strelka&Mutect" = 39149 
+)
+
+# Plot
+upset(fromExpression(input), 
+      nintersects = 7, 
+      nsets = 3, 
+      order.by = "freq", 
+      decreasing = T, 
+      mb.ratio = c(0.6, 0.4),
+      number.angles = 0, 
+      text.scale = 1.1, 
+      point.size = 2.8, 
+      line.size = 1,
+      sets.bar.color = "darkgreen",
+      matrix.color = "darkgreen",
+      main.bar.color = "darkgreen",
+      )
+```
+
+## Single COLO829 run, inheriteds removed, pre-filters applied, normalized
+
+```{r}
+
+# Dataset
+singlet_input <- c(
+Strelka = 12725,                
+Mutect = 2364,                                                                         
+RUFUS = 3185,                                                                         
+"RUFUS&Strelka" = 569,                                                                         
+"Strelka&Mutect" = 6860,                                                                         
+"RUFUS&Mutect" = 348,                                                                      
+"RUFUS&Strelka&Mutect" = 37460
+)
+
+# Plot
+upset(fromExpression(singlet_input), 
+      nintersects = 7, 
+      nsets = 3, 
+      order.by = "freq", 
+      decreasing = T, 
+      mb.ratio = c(0.6, 0.4),
+      number.angles = 0, 
+      text.scale = 1.1, 
+      point.size = 2.8, 
+      line.size = 1,
+      sets.bar.color = "maroon",
+      matrix.color = "maroon",
+      main.bar.color = "maroon",
+      )
+```
+
+## Chr-by-Chr CALL Intersections no prefilters applied, no inheriteds removed, normalized
+
+```{r}
+
+# Dataset
+inherited_input <- c(
+  Strelka = 12095,                                      
+Mutect = 2182,                                    
+RUFUS = 31121,                                    
+"RUFUS&Strelka" = 1199,                                    
+"Strelka&Mutect" = 8511,                                    
+"RUFUS&Mutect" = 530,                                    
+"RUFUS&Strelka&Mutect" = 35809
+)
+
+# Plot
+upset(fromExpression(inherited_input), 
+      nintersects = 7, 
+      nsets = 3, 
+      order.by = "freq", 
+      decreasing = T, 
+      mb.ratio = c(0.6, 0.4),
+      number.angles = 0, 
+      text.scale = 1.1, 
+      point.size = 2.8, 
+      line.size = 1,
+      sets.bar.color = "navy",
+      matrix.color = "navy",
+      main.bar.color = "navy",
+      )
+```
+
+
+# Regular rufus call (SG performed), prefilters applied, inheriteds removed, normalized
+
+```{r}
+
+# Dataset
+AO20_input <- c(
+  Strelka = 12776,                                             
+  Mutect = 2435,                                           
+  RUFUS = 1871,                                           
+  "RUFUS&Strelka" = 518,                                           
+  "Strelka&Mutect" = 7734,                                           
+  "RUFUS&Mutect" = 277,
+  "RUFUS&Strelka&Mutect" = 36586
+)
+
+# Plot
+upset(fromExpression(AO20_input), 
+      nintersects = 7, 
+      nsets = 3, 
+      order.by = "freq", 
+      decreasing = T, 
+      mb.ratio = c(0.6, 0.4),
+      number.angles = 0, 
+      text.scale = 1.1, 
+      point.size = 2.8, 
+      line.size = 1,
+      sets.bar.color = "darkgreen",
+      matrix.color = "darkgreen",
+      main.bar.color = "darkgreen",
+      )
+```
+
+
+# Double bar chart for AO>12 and AO>20
+```{r}
+data <- read.csv("data/COLO829_AO12_AO20.csv")
+group <- data$Group
+cutoff <- data$Cutoff
+type <- data$Type
+abs_value <- data$Adjusted
+abs_label <- data$Labels
+perc_label <- data$Percentage
+perc_value <- data$Fraction
+
+ggplot(data, aes(x = cutoff , y = abs_value, fill = type, label = abs_label)) +
+  geom_bar(position="stack", 
+           stat="identity") +
+  geom_text(size = 2.5, position = position_stack(vjust = 0.8)) +
+  ggtitle("Raw Values of Pacbio Validated Variants Stratified by AO Cutoff & Caller") +
+  xlab("AO Cutoff") + 
+  ylab("Raw Counts") +
+  facet_grid(~ Group)
+
+ggplot(data, aes(x = cutoff , y = perc_value, fill = type, label = perc_label)) +
+  geom_bar(position="fill",
+           stat="identity") +
+  geom_text(size = 2.5,
+            position = position_fill(vjust = 0.8)) +
+  ggtitle("Percentage of Pacbio Validated Variants Stratified by AO Cutoff & Caller") +
+  xlab("AO Cutoff") + 
+  ylab("Percentage Validated") +
+  facet_grid(~ Group)
+```
+
+# Double bar chart for regular run vs chr-by-chr run filtered, inheriteds removed, svs removed overlapping w/ Jiny vcfs
+```{r}
+data <- read.csv("data/COLO829_final_full_vs_chr_by_chr.csv")
+group <- data$Group
+run_type <- data$Run.Type
+type <- data$Type
+abs_value <- data$Adjusted
+abs_label <- data$Labels
+perc_label <- data$Percentage
+perc_value <- data$Fraction
+
+ggplot(data, aes(x = run_type , y = abs_value, fill = type, label = abs_label)) +
+  geom_bar(position="stack", 
+           stat="identity") +
+  scale_fill_brewer(palette = "Paired") +
+  geom_text(size = 3, position = position_stack(vjust = 0.8)) +
+  ggtitle("Raw Values of Pacbio Validated Variants Stratified by RUFUS Run Type & Caller") +
+  xlab("RUFUS Run Type") + 
+  ylab("Raw Counts") +
+  facet_grid(~ Group)
+
+ggplot(data, aes(x = run_type , y = perc_value, fill = type, label = perc_label)) +
+  geom_bar(position="fill",
+           stat="identity") +
+  scale_fill_brewer(palette = "Paired") +
+  geom_text(size = 3,
+            position = position_fill(vjust = 0.8)) +
+  ggtitle("Percentage of Pacbio Validated Variants Stratified by RUFUS Run Type & Caller") +
+  xlab("RUFUS Run Type") + 
+  ylab("Percentage Validated") +
+  facet_grid(~ Group)
+```
+
+
+# Double bar chart for regular run vs chr-by-chr run filtered, inheriteds removed, svs removed overlapping w/ Jiny vcfs
+```{r}
+data <- read.csv("data/COLO829_prefiltered_full_vs_chr_by_chr.csv")
+group <- data$Group
+run_type <- data$Run.Type
+type <- data$Type
+abs_value <- data$Adjusted
+abs_label <- data$Labels
+perc_label <- data$Percentage
+perc_value <- data$Fraction
+
+ggplot(data, aes(x = run_type , y = abs_value, fill = type, label = abs_label)) +
+  geom_bar(position="stack", 
+           stat="identity") +
+  scale_fill_brewer(palette = "Paired") +
+  geom_text(size = 3, position = position_stack(vjust = 0.8)) +
+  ggtitle("Raw Values of Pacbio Validated Variants Stratified by RUFUS Run Type & Caller") +
+  xlab("RUFUS Run Type") + 
+  ylab("Raw Counts") +
+  facet_grid(~ Group)
+
+ggplot(data, aes(x = run_type , y = perc_value, fill = type, label = perc_label)) +
+  geom_bar(position="fill",
+           stat="identity") +
+  scale_fill_brewer(palette = "Paired") +
+  geom_text(size = 3,
+            position = position_fill(vjust = 0.8)) +
+  ggtitle("Percentage of Pacbio Validated Variants Stratified by RUFUS Run Type & Caller") +
+  xlab("RUFUS Run Type") + 
+  ylab("Percentage Validated") +
+  facet_grid(~ Group)
+```
+
