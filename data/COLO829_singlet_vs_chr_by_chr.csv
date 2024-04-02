@@ -1,0 +1,29 @@
+﻿Group,Coverage,Type,Fraction,Percentage,Adjusted,Raw,Labels
+All,350x,Pacbio Validated,0.890393113,89.0%,34858,34858,34609
+All,350x,Non-Validated,0.109606887,11.0%,4291,39149,38831
+All,130x,Pacbio Validated,0.931740523,93.2%,34903,34903,34903
+All,130x,Non-Validated,0.068259477,6.8%,2557,37460,37460
+Mutect2+Strelka,350x,Pacbio Validated,0.803713015,80.4%,4156,4156,4405
+Mutect2+Strelka,350x,Non-Validated,0.196286985,19.6%,1015,5171,5489
+Mutect2+Strelka,130x,Pacbio Validated,0.599271137,59.9%,4111,4111,4111
+Mutect2+Strelka,130x,Non-Validated,0.400728863,40.1%,2749,6860,6860
+Mutect2+RUFUS,350x,Pacbio Validated,0.239051095,23.9%,131,131,131/548
+Mutect2+RUFUS,350x,Non-Validated,0.760948905,76.1%,417,548,
+Mutect2+RUFUS,130x,Pacbio Validated,0.32183908,32.2%,112,112,112/348
+Mutect2+RUFUS,130x,Non-Validated,0.67816092,67.8%,236,348,
+RUFUS+Strelka,350x,Pacbio Validated,0.346793349,34.7%,438,438,418
+RUFUS+Strelka,350x,Non-Validated,0.653206651,65.3%,825,1263,1237
+RUFUS+Strelka,130x,Pacbio Validated,0.762741652,76.3%,434,434,434/569
+RUFUS+Strelka,130x,Non-Validated,0.237258348,23.7%,135,569,
+Mutect,350x,Pacbio Validated,0.110443623,11.0%,239,239,242
+Mutect,350x,Non-Validated,0.889556377,89.0%,1925,2164,2194
+Mutect,130x,Pacbio Validated,0.107021997,10.7%,253,253,253
+Mutect,130x,Non-Validated,0.892978003,89.3%,2111,2364,2364
+RUFUS,350x,Pacbio Validated,0.178455656,17.8%,2147,2147,207
+RUFUS,350x,Non-Validated,0.821544344,82.2%,9884,12031,10026
+RUFUS,130x,Pacbio Validated,0.561695447,56.2%,1789,1789,1789
+RUFUS,130x,Non-Validated,0.438304553,43.8%,1396,3185,3185
+Strelka,350x,Pacbio Validated,0.312359737,31.2%,3758,3758,3778
+Strelka,350x,Non-Validated,0.687640263,68.8%,8273,12031,12057
+Strelka,130x,Pacbio Validated,0.295638507,29.6%,3762,3762,3762
+Strelka,130x,Non-Validated,0.704361493,70.4%,8963,12725,12725
